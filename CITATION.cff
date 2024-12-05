@@ -1,0 +1,17 @@
+# YAML 1.2
+---
+authors:
+  - family-names: Rossman
+    given-names: Hagai
+  - family-names: Keshet
+    given-names: Ayya
+  - family-names: Gorfine
+    given-names: Malka
+cff-version: 1.2.0
+doi: "https://doi.org/10.5281/zenodo.6300873"
+license: MIT
+message: "If you use this software, please cite it using these metadata."
+repository-code: "https://github.com/hrossman/pymsm"
+title: PyMSM, Multistate modeling in Python
+date-released: 2022-02-27
+...
