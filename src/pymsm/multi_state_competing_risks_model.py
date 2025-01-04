@@ -395,7 +395,7 @@ class MultiStateModel:
         
         state_specific_df.drop(["origin_state"], axis=1, inplace=True)
         state_specific_df.reset_index(drop=True, inplace=True)
-        state_specific_df.to_csv(f"/Users/taninzeraati/GitHub/bcogc-team/notebooks/Time_To_Event/Full Application/state_data{state}.csv", index=False)
+        # state_specific_df.to_csv(f"/Users/taninzeraati/GitHub/bcogc-team/notebooks/Time_To_Event/Full Application/state_data{state}.csv", index=False)
         
         crm = CompetingRisksModel(self._event_specific_fitter)
         crm.fit(
@@ -477,13 +477,13 @@ class MultiStateModel:
                     sample_covariates, origin_state, max_transitions, sample_id, current_time
                 )
             )
-        # else:  # Run parallel jobs
-        #     runs = Parallel(n_jobs=n_jobs)(
-        #         delayed(self._one_monte_carlo_run)(
-        #             sample_covariates, origin_state, max_transitions, sample_id, current_time
-        #         )
-        #         for i in tqdm(range(0, n_random_samples))
-        #     )
+        else:  # Run parallel jobs
+            runs = Parallel(n_jobs=n_jobs)(
+                delayed(self._one_monte_carlo_run)(
+                    sample_covariates, origin_state, max_transitions, sample_id, current_time
+                )
+                for i in tqdm(range(0, n_random_samples))
+            )
 
         if print_paths:
             self._print_paths(runs)
@@ -508,7 +508,7 @@ class MultiStateModel:
             
         
         current_state = origin_state
-        print('current state', current_state)
+        # print('current state', current_state)
         for i in range(0, max_transitions):
             # print('inside one monte carlo run', current_state)
             next_state = self._sample_next_state(
